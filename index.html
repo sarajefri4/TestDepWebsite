@@ -10,324 +10,276 @@
 
   <canvas id="stars"></canvas>
 
-  <!-- ═══ TOP BAR ═══════════════════════════════════════════ -->
-  <nav class="topbar">
+  <!-- Fixed top bar -->
+  <nav class="topbar" id="topbar">
     <span class="tb-logo"><span class="tb-dot">·</span>D&amp;T</span>
-    <span class="tb-center">DIGITAL UNIVERSE</span>
-    <a href="#s10" class="tb-cta">Get in Touch</a>
+    <span class="tb-title">DIGITAL UNIVERSE</span>
+    <a href="#scene-footer" class="tb-cta">Get in Touch</a>
   </nav>
 
-
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 1 — RADAR / INTRO
-       Dark teal background, concentric sonar rings, centre star
-       ═══════════════════════════════════════════════════════ -->
-  <section class="s-radar" id="s1">
-    <div class="radar-wrap">
-      <div class="rr rr1"></div>
-      <div class="rr rr2"></div>
-      <div class="rr rr3"></div>
-      <div class="rr rr4"></div>
-      <div class="rr rr5"></div>
-      <!-- horizontal / vertical cross-hairs -->
-      <div class="radar-h"></div>
-      <div class="radar-v"></div>
-      <!-- centre icon -->
-      <div class="radar-dot">✦</div>
-    </div>
-  </section>
+  <!-- Progress indicator -->
+  <div class="progress-bar" id="progress-bar"></div>
 
 
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 2 — BRAND HERO
-       "D&T DIGITAL  ✦  UNIVERSE" centred, large orb behind
-       ═══════════════════════════════════════════════════════ -->
-  <section class="s-brand" id="s2">
-    <div class="brand-orb"></div>
-
-    <div class="brand-inner">
-      <!-- Main brand row -->
-      <div class="brand-row" data-reveal="fade-up">
-        <span class="br-left">D&amp;T DIGITAL</span>
-        <span class="br-star">✦</span>
-        <span class="br-right">UNIVERSE</span>
-      </div>
-      <!-- Thin rule + subtitle -->
-      <div class="brand-rule" data-reveal="fade-up" style="--delay:.15s"></div>
-      <p class="brand-sub" data-reveal="fade-up" style="--delay:.25s">
-        Built to meet you where it matters
-      </p>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 3 — STATEMENT
-       Large title left, "WE'RE TECH" + description right
-       ═══════════════════════════════════════════════════════ -->
-  <section class="s-statement" id="s3">
-    <div class="stmt-orb"></div>
-
-    <div class="stmt-layout">
-      <!-- Large stacked title -->
-      <div class="stmt-title" data-reveal="fade-right">
-        <div class="stl1">D&amp;T DIGITAL</div>
-        <div class="stl2">UNIVERSE</div>
-      </div>
-
-      <!-- Right block -->
-      <div class="stmt-block">
-        <div class="sbh" data-reveal="fade-up">
-          WE'RE <span class="gold">TECH</span>
-        </div>
-        <span class="sbh-star">✦</span>
-        <p class="sbd" data-reveal="fade-up" style="--delay:.1s">
-          Your compass for D&amp;T's digital formation.<br>
-          Connected by progress, driven by innovation,<br>
-          powered by technology.
-        </p>
+  <!-- ══════════════════════════════════════════════════════
+       SCENE 1 — RADAR INTRO
+       200vh: rings expand + star rotates as you scroll
+       ══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-radar" style="--h:200vh">
+    <div class="pin">
+      <div class="radar-wrap">
+        <div class="rr" data-r="1"></div>
+        <div class="rr" data-r="2"></div>
+        <div class="rr" data-r="3"></div>
+        <div class="rr" data-r="4"></div>
+        <div class="rr" data-r="5"></div>
+        <div class="radar-h"></div>
+        <div class="radar-v"></div>
+        <div class="radar-dot" id="rd">✦</div>
       </div>
     </div>
-  </section>
+  </div>
 
 
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 4 — STATS
-       Left label · "100+" centrepiece · Right "2K"
-       ═══════════════════════════════════════════════════════ -->
-  <section class="s-stats" id="s4">
-    <div class="stats-wrap">
-      <div class="sw-left" data-reveal="fade-up">
-        <span class="swl-hash">#</span>
-        <span class="swl-text">BRAND IN<br>INDUSTRIES</span>
-      </div>
-
-      <div class="sw-big" data-reveal="fade-up" style="--delay:.1s">
-        <span class="swb-num counter" data-count="100">0</span>
-        <span class="swb-plus">+</span>
-      </div>
-
-      <div class="sw-right" data-reveal="fade-up" style="--delay:.2s">
-        <div class="swr-label">
-          <span class="swl-hash">#</span>
-          <span class="swl-text">BRAND IN</span>
+  <!-- ══════════════════════════════════════════════════════
+       SCENE 2 — BRAND HERO
+       280vh: left/right text slide in, ✦ scales up + rotates
+       ══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-brand" style="--h:280vh">
+    <div class="pin">
+      <div class="brand-orb"></div>
+      <div class="brand-inner">
+        <div class="brand-row">
+          <span class="br-left"  id="br-left">D&amp;T DIGITAL</span>
+          <span class="br-star"  id="br-star">✦</span>
+          <span class="br-right" id="br-right">UNIVERSE</span>
         </div>
-        <div class="swr-num">2K</div>
+        <div class="brand-rule" id="brand-rule"></div>
+        <p class="brand-sub" id="brand-sub">Built to meet you where it matters</p>
       </div>
     </div>
-  </section>
+  </div>
 
 
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 5 — THE PATHS WE CHART
-       Two-column: title left · description + numbered item right
-       ═══════════════════════════════════════════════════════ -->
-  <section class="s-paths" id="s5">
-    <div class="paths-wrap">
-      <div class="pw-left">
-        <h2 class="pwl-title" data-reveal="fade-right">
-          THE PATHS<br>WE CHART
-        </h2>
-      </div>
-
-      <div class="pw-right">
-        <p class="pwr-by" data-reveal="fade-up">Created by any World Star</p>
-        <span class="pwr-star">✦</span>
-        <p class="pwr-item" data-reveal="fade-up" style="--delay:.1s">
-          01 &nbsp;Reaching the future of investment with<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integrated projects
-        </p>
-        <p class="pwr-desc" data-reveal="fade-up" style="--delay:.2s">
-          Our experience in front of you to benefit from it as an individual
-          or an institution to deliver the best results.
-        </p>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 6 — DEPARTMENT NAV + PROJECT CARDS
-       Left: stacked department list   Right: card panels
-       ═══════════════════════════════════════════════════════ -->
-  <section class="s-dept" id="s6">
-    <div class="dept-wrap">
-
-      <!-- Left nav -->
-      <div class="dept-nav">
-        <div class="dn-item active" data-reveal="fade-right">
-          <div class="dni-name">AI &amp; AUTOMATION</div>
-          <div class="dni-subs">
-            <span>Intelligent automation systems</span>
-            <span>AI-powered analytics dashboard</span>
-            <span>Generative AI assistant</span>
-          </div>
+  <!-- ══════════════════════════════════════════════════════
+       SCENE 3 — STATEMENT
+       300vh: title builds, "WE'RE TECH" + description reveal
+       ══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-statement" style="--h:300vh">
+    <div class="pin">
+      <div class="stmt-orb"></div>
+      <div class="wrap stmt-layout">
+        <div class="stmt-title">
+          <div class="stl1" id="stl1">D&amp;T DIGITAL</div>
+          <div class="stl2" id="stl2">UNIVERSE</div>
         </div>
-
-        <div class="dn-item" data-reveal="fade-right" style="--delay:.1s">
-          <div class="dni-name">OUR FIRM 2</div>
-          <p class="dni-desc">Building what's next, today.</p>
-          <div class="dni-subs">
-            <span>Enterprise app modernisation</span>
-            <span>Cloud-native dev platform</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right cards -->
-      <div class="dept-cards">
-        <div class="dc-card dc-main" data-reveal="fade-left">
-          <div class="dcc-top">
-            <span class="dcc-dot"></span>
-            <span class="dcc-label">PROJECT 01</span>
-          </div>
-          <h3 class="dcc-title">Intelligent Process Automation</h3>
-          <p class="dcc-sub">End-to-end workflow automation reducing manual effort by 70%.</p>
-        </div>
-        <div class="dc-card dc-peek" data-reveal="fade-left" style="--delay:.15s">
-          <div class="dcc-top">
-            <span class="dcc-dot"></span>
-            <span class="dcc-label">PROJECT 02</span>
-          </div>
-          <h3 class="dcc-title">AI Analytics Dashboard</h3>
-          <p class="dcc-sub">Real-time predictive analytics for leadership visibility.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 7 — OUR FIRM / TEAM
-       Label · row of 4 avatars · dark overlay card below
-       ═══════════════════════════════════════════════════════ -->
-  <section class="s-team" id="s7">
-    <div class="team-wrap">
-
-      <p class="team-label" data-reveal="fade-up">OUR FIRM 2</p>
-
-      <div class="team-photos" data-reveal="fade-up" style="--delay:.1s">
-        <div class="tp">
-          <div class="tp-photo" style="--ph-hue:200deg"></div>
-          <div class="tp-name">Sarah Al-Rashid</div>
-          <div class="tp-role">AI Lead</div>
-        </div>
-        <div class="tp">
-          <div class="tp-photo" style="--ph-hue:30deg"></div>
-          <div class="tp-name">Omar Khalid</div>
-          <div class="tp-role">Data Architect</div>
-        </div>
-        <div class="tp">
-          <div class="tp-photo" style="--ph-hue:160deg"></div>
-          <div class="tp-name">Noor Hassan</div>
-          <div class="tp-role">Sec. Engineer</div>
-        </div>
-        <div class="tp">
-          <div class="tp-photo" style="--ph-hue:260deg"></div>
-          <div class="tp-name">Faisal Al-Amri</div>
-          <div class="tp-role">Cloud Architect</div>
-        </div>
-      </div>
-
-      <!-- Dark overlay card -->
-      <div class="team-card" data-reveal="fade-up" style="--delay:.2s">
-        <div class="tc-inner">
-          <p class="tc-label">OUR FIRM 2</p>
-          <h3 class="tc-title">SAUTÉ DU CHEN</h3>
-          <p class="tc-desc">
-            The team driving D&amp;T's digital transformation —
-            blending deep domain expertise with cutting-edge technology
-            to deliver outcomes that endure.
+        <div class="stmt-block">
+          <div class="sbh" id="sbh">WE'RE <span class="gold">TECH</span></div>
+          <span class="sbh-star" id="sbh-star">✦</span>
+          <p class="sbd" id="sbd">
+            Your compass for D&amp;T's digital formation.<br>
+            Connected by progress, driven by innovation,<br>
+            powered by technology.
           </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SCENE 4 — STATS
+       240vh: labels slide in, "100+" scales up from centre
+       ══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-stats" style="--h:240vh">
+    <div class="pin">
+      <div class="wrap stats-layout">
+        <div class="sw-left" id="sw-left">
+          <span class="sw-hash">#</span>
+          <span class="sw-lbl">BRAND IN<br>INDUSTRIES</span>
+        </div>
+        <div class="sw-big" id="sw-big">
+          <span class="counter" data-count="100" id="cnt">0</span>
+          <span class="sw-plus">+</span>
+        </div>
+        <div class="sw-right" id="sw-right">
+          <div class="swr-top">
+            <span class="sw-hash">#</span>
+            <span class="sw-lbl">BRAND IN</span>
+          </div>
+          <div class="swr-num">2K</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SCENE 5 — THE PATHS WE CHART
+       260vh: title slides from left, description fades right
+       ══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-paths" style="--h:260vh">
+    <div class="pin">
+      <div class="wrap paths-layout">
+        <div class="pw-left">
+          <h2 class="pwl-title" id="pwl">THE PATHS<br>WE CHART</h2>
+        </div>
+        <div class="pw-right">
+          <p class="pwr-by"   id="pwr-by">Created by any World Star</p>
+          <span class="pwr-star">✦</span>
+          <p class="pwr-item" id="pwr-item">
+            01 &nbsp;Reaching the future of investment with<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integrated projects
+          </p>
+          <p class="pwr-desc" id="pwr-desc">
+            Our experience in front of you to benefit from it as an individual
+            or an institution to deliver the best results.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SCENE 6 — DEPARTMENT NAV + PROJECT CARDS
+       360vh: nav slides left · cards FLOAT IN (Apple-style 3D)
+       ══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-dept" style="--h:360vh">
+    <div class="pin">
+      <div class="wrap dept-layout">
+
+        <!-- Left nav -->
+        <div class="dept-nav" id="dept-nav">
+          <div class="dn-item active" id="dn0">
+            <div class="dni-name">AI &amp; AUTOMATION</div>
+            <div class="dni-subs">
+              <span>Intelligent automation systems</span>
+              <span>AI-powered analytics dashboard</span>
+              <span>Generative AI assistant</span>
+            </div>
+          </div>
+          <div class="dn-item" id="dn1">
+            <div class="dni-name">OUR FIRM 2</div>
+            <p class="dni-desc">Building what's next, today.</p>
+            <div class="dni-subs">
+              <span>Enterprise app modernisation</span>
+              <span>Cloud-native dev platform</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Apple-style floating cards -->
+        <div class="dept-cards">
+          <div class="dc-card" id="dc0">
+            <div class="dcc-top"><span class="dcc-dot"></span><span class="dcc-lbl">PROJECT 01</span></div>
+            <h3 class="dcc-h3">Intelligent Process Automation</h3>
+            <p class="dcc-p">End-to-end workflow automation reducing manual effort by 70%.</p>
+          </div>
+          <div class="dc-card" id="dc1">
+            <div class="dcc-top"><span class="dcc-dot"></span><span class="dcc-lbl">PROJECT 02</span></div>
+            <h3 class="dcc-h3">AI Analytics Dashboard</h3>
+            <p class="dcc-p">Real-time predictive analytics for leadership visibility.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SCENE 7 — TEAM / OUR FIRM
+       300vh: photos float up · overlay card rises
+       ══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-team" style="--h:300vh">
+    <div class="pin">
+      <div class="wrap team-wrap">
+        <p class="team-lbl" id="team-lbl">OUR FIRM 2</p>
+        <div class="team-photos">
+          <div class="tp" id="tp0"><div class="tp-photo" style="--h:200deg"></div><div class="tp-name">Sarah Al-Rashid</div><div class="tp-role">AI Lead</div></div>
+          <div class="tp" id="tp1"><div class="tp-photo" style="--h:30deg"></div><div class="tp-name">Omar Khalid</div><div class="tp-role">Data Architect</div></div>
+          <div class="tp" id="tp2"><div class="tp-photo" style="--h:160deg"></div><div class="tp-name">Noor Hassan</div><div class="tp-role">Sec. Engineer</div></div>
+          <div class="tp" id="tp3"><div class="tp-photo" style="--h:260deg"></div><div class="tp-name">Faisal Al-Amri</div><div class="tp-role">Cloud Architect</div></div>
+        </div>
+        <div class="team-card" id="team-card">
+          <p class="tc-lbl">OUR FIRM 2</p>
+          <h3 class="tc-h3">SAUTÉ DU CHEN</h3>
+          <p class="tc-p">The team driving D&amp;T's digital transformation — blending deep domain expertise with cutting-edge technology to deliver outcomes that endure.</p>
           <div class="tc-stats">
             <div><span class="tc-n">7+</span><span class="tc-l">Years</span></div>
             <div><span class="tc-n">40+</span><span class="tc-l">Members</span></div>
           </div>
         </div>
       </div>
-
     </div>
-  </section>
+  </div>
 
 
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 8 — OUR STRATEGY FOR 2011 & BEYOND
-       Large bold headline + G E A R letter boxes
-       ═══════════════════════════════════════════════════════ -->
-  <section class="s-strategy" id="s8">
-    <div class="strat-wrap">
+  <!-- ══════════════════════════════════════════════════════
+       SCENE 8 — STRATEGY + G·E·A·R
+       360vh: headline builds · GEAR boxes FLOAT IN (Apple-style)
+       ══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-strategy" style="--h:360vh">
+    <div class="pin">
+      <div class="strat-bg-orb"></div>
+      <div class="wrap strat-layout">
 
-      <div class="strat-left">
-        <p class="strat-pre" data-reveal="fade-up">OUR</p>
-        <h2 class="strat-h2" data-reveal="fade-up" style="--delay:.05s">
-          STRATEGY
-        </h2>
-        <p class="strat-for" data-reveal="fade-up" style="--delay:.1s">
-          FOR 2011
-        </p>
-        <p class="strat-beyond" data-reveal="fade-up" style="--delay:.15s">
-          &amp; BEYOND
-        </p>
-        <span class="strat-star" data-reveal="fade-up" style="--delay:.2s">✦</span>
-      </div>
-
-      <div class="strat-right">
-        <div class="gear-row" data-reveal="fade-up" style="--delay:.1s">
-
-          <div class="gear-box">
-            <div class="gb-letter">G</div>
-            <div class="gb-word">GROWTH</div>
-            <p class="gb-desc">Scaling impact across every domain</p>
-          </div>
-
-          <div class="gear-box">
-            <div class="gb-letter">E</div>
-            <div class="gb-word">EXCELLENCE</div>
-            <p class="gb-desc">Delivering quality without compromise</p>
-          </div>
-
-          <div class="gear-box">
-            <div class="gb-letter">A</div>
-            <div class="gb-word">AGILITY</div>
-            <p class="gb-desc">Adapting at the speed of change</p>
-          </div>
-
-          <div class="gear-box">
-            <div class="gb-letter">R</div>
-            <div class="gb-word">RESULTS</div>
-            <p class="gb-desc">Outcomes that matter, every time</p>
-          </div>
-
+        <div class="strat-left">
+          <p  class="st-pre"    id="st-pre">OUR</p>
+          <h2 class="st-h2"     id="st-h2">STRATEGY</h2>
+          <p  class="st-for"    id="st-for">FOR 2011</p>
+          <p  class="st-beyond" id="st-beyond">&amp; BEYOND</p>
+          <span class="st-star" id="st-star">✦</span>
         </div>
-      </div>
 
+        <div class="strat-right">
+          <div class="gear-row">
+            <div class="gear-box" id="gb0">
+              <div class="gb-letter">G</div>
+              <div class="gb-word">GROWTH</div>
+              <p class="gb-desc">Scaling impact across every domain</p>
+            </div>
+            <div class="gear-box" id="gb1">
+              <div class="gb-letter">E</div>
+              <div class="gb-word">EXCELLENCE</div>
+              <p class="gb-desc">Delivering quality without compromise</p>
+            </div>
+            <div class="gear-box" id="gb2">
+              <div class="gb-letter">A</div>
+              <div class="gb-word">AGILITY</div>
+              <p class="gb-desc">Adapting at the speed of change</p>
+            </div>
+            <div class="gear-box" id="gb3">
+              <div class="gb-letter">R</div>
+              <div class="gb-word">RESULTS</div>
+              <p class="gb-desc">Outcomes that matter, every time</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </section>
+  </div>
 
 
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 9 — SHOWCASE / DARK CARD
-       Left label  ·  Right: dark glass card with project detail
-       ═══════════════════════════════════════════════════════ -->
-  <section class="s-showcase" id="s9">
-    <div class="show-wrap">
-
-      <div class="show-left" data-reveal="fade-right">
-        <p class="sl-label">SAUTÉ GLOBUS</p>
-      </div>
-
-      <div class="show-right">
-        <div class="show-card" data-reveal="fade-left">
+  <!-- ══════════════════════════════════════════════════════
+       SCENE 9 — SHOWCASE
+       260vh: dark card slides + tilts in with perspective
+       ══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-showcase" style="--h:260vh">
+    <div class="pin">
+      <div class="wrap show-layout">
+        <div class="show-lbl" id="show-lbl">
+          <span>SAUTÉ GLOBUS</span>
+        </div>
+        <div class="show-card" id="show-card">
           <div class="sc-header">
             <span class="sc-dot"></span>
             <span class="sc-name">SAUTÉ DU CHEN</span>
           </div>
           <h3 class="sc-title">Digital Enterprise Platform</h3>
-          <p class="sc-desc">
-            A comprehensive platform connecting all enterprise systems,
-            powered by AI and built for scale across the organisation.
-          </p>
+          <p class="sc-desc">A comprehensive platform connecting all enterprise systems, powered by AI and built for scale.</p>
           <div class="sc-metrics">
             <div class="sc-m"><span class="sc-mn">14</span><span class="sc-ml">Technologies</span></div>
             <div class="sc-m"><span class="sc-mn">3K</span><span class="sc-ml">Active Users</span></div>
@@ -335,26 +287,24 @@
           </div>
         </div>
       </div>
-
     </div>
-  </section>
+  </div>
 
 
-  <!-- ═══════════════════════════════════════════════════════
-       SECTION 10 — FOOTER STATEMENT
-       "WE'VE SPENT 7 YEARS…" · Large ✦ · "WE'LL DELIVER…"
-       ═══════════════════════════════════════════════════════ -->
-  <footer class="s-footer" id="s10">
-    <div class="footer-wrap">
-      <div class="fw-left" data-reveal="fade-up">
-        WE'VE SPENT 7 YEARS<br>OPERATING BEHIND<br>THE SCENES
-      </div>
-      <div class="fw-star" data-reveal="fade-up" style="--delay:.15s">✦</div>
-      <div class="fw-right" data-reveal="fade-up" style="--delay:.25s">
-        WE'LL DELIVER<br>GREAT RESULTS
+  <!-- ══════════════════════════════════════════════════════
+       SCENE 10 — FOOTER STATEMENT
+       200vh: text slides from sides · giant ✦ scales up
+       ══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-footer" style="--h:200vh">
+    <div class="pin">
+      <div class="footer-glow"></div>
+      <div class="wrap footer-layout">
+        <div class="fw-left"  id="fw-left">WE'VE SPENT 7 YEARS<br>OPERATING BEHIND<br>THE SCENES</div>
+        <div class="fw-star"  id="fw-star">✦</div>
+        <div class="fw-right" id="fw-right">WE'LL DELIVER<br>GREAT RESULTS</div>
       </div>
     </div>
-  </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
