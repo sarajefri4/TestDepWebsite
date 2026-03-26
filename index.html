@@ -3,261 +3,568 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>D&T — Technology Department</title>
+  <!--
+  ═══════════════════════════════════════════════════
+  PAGE TITLE — Change this to update the browser tab
+  ═══════════════════════════════════════════════════
+  -->
+  <title>D&amp;T — Technology Department</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Stars Canvas -->
+  <!-- Animated star field — rendered by script.js, do not remove -->
   <canvas id="stars"></canvas>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">
-      <span class="logo-dot">·</span>D&amp;T
+  <!--
+  ═══════════════════════════════════════════
+  HEADER — Fixed bar at the top of the page
+  Change the logo text or button label here
+  ═══════════════════════════════════════════
+  -->
+  <header id="site-header">
+    <!-- Logo — change "D&T" to your brand name -->
+    <div class="logo"><span class="logo-dot">·</span>D&amp;T</div>
+
+    <!-- Section progress indicator — dots auto-update as you scroll -->
+    <div class="progress-dots" id="progress-dots">
+      <span class="pdot active"></span>
+      <span class="pdot"></span>
+      <span class="pdot"></span>
+      <span class="pdot"></span>
+      <span class="pdot"></span>
+      <span class="pdot"></span>
+      <span class="pdot"></span>
+      <span class="pdot"></span>
     </div>
-    <a href="#contact" class="btn-contact">Get in Touch</a>
+
+    <!-- CTA button — change href="#contact" if needed -->
+    <a href="#contact" class="btn-ghost">Get in Touch</a>
   </header>
 
-  <!-- Main Layout -->
-  <main>
 
-    <!-- Left Nav -->
-    <nav class="dept-nav">
-      <ul>
-        <li class="active" data-section="ai-automation">
-          <span class="nav-icon">✦</span>
-          AI &amp; AUTOMATION
-        </li>
-        <li data-section="platforms-applications">
-          PLATFORMS &amp; APPLICATIONS
-        </li>
-        <li data-section="data-solutions">
-          DATA SOLUTIONS
-        </li>
-        <li data-section="infra-security">
-          INFRASTRUCTURE &amp; SECURITY
-        </li>
-        <li data-section="workplace-tech">
-          WORKPLACE TECHNOLOGY
-        </li>
-        <li data-section="digital-channels">
-          DIGITAL CHANNELS
-        </li>
-      </ul>
-    </nav>
+  <!-- ═══════════════════════════════════════════════════════
+       SCENE 1 · HERO
+       ───────────────────────────────────────────────────────
+       HOW IT WORKS: This div is 280vh tall. As you scroll
+       through those 280 virtual viewport-heights the inner
+       content stays "stuck" to the screen and animates.
+       More height = slower/longer animation. Less = faster.
+       ═══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-hero" style="--scene-h: 280vh;">
+    <div class="scene-inner">
 
-    <!-- Right Content -->
-    <section class="projects-panel">
+      <!-- Ambient glow orb (decorative) -->
+      <div class="orb orb-center"></div>
 
-      <!-- AI & AUTOMATION -->
-      <div class="section-content active" id="ai-automation">
-        <div class="section-header">
-          <p class="section-label">01 / AI &amp; AUTOMATION</p>
-          <h2>Intelligent systems<br />that drive outcomes.</h2>
-          <p class="section-desc">We build AI-powered solutions and automation frameworks that eliminate friction, accelerate decision-making, and unlock new capabilities across the enterprise.</p>
+      <!-- Diamond icon — rotates and scales as you scroll in -->
+      <div class="hero-diamond" id="hero-diamond">✦</div>
+
+      <!-- Expanding ring around the diamond -->
+      <div class="hero-ring" id="hero-ring"></div>
+
+      <!--
+      HERO TITLE — Change "D&T" to your organisation name.
+      The three spans animate in separately.
+      -->
+      <h1 class="hero-title" id="hero-title">
+        <span class="ht-left">D</span>
+        <span class="ht-amp">&amp;</span>
+        <span class="ht-right">T</span>
+      </h1>
+
+      <!-- HERO SUBTITLE — Change this line -->
+      <p class="hero-dept" id="hero-dept">Technology Department</p>
+
+      <!-- HERO TAGLINE — Change this line -->
+      <p class="hero-tagline" id="hero-tagline">Building what's next, today.</p>
+
+      <!-- Scroll prompt — fades out automatically -->
+      <div class="scroll-cue" id="scroll-cue">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+
+    </div>
+  </div><!-- end scene-hero -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SCENE 2 · STATEMENT + STATS
+       ───────────────────────────────────────────────────────
+       Large bold statement followed by three key numbers.
+       ═══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-stats" style="--scene-h: 260vh;">
+    <div class="scene-inner">
+
+      <div class="orb orb-right"></div>
+
+      <div class="stmt-wrap">
+
+        <!--
+        STATEMENT — Change "WE'RE" or "TECH" here.
+        The gold word animates in from the right.
+        -->
+        <div class="stmt-line" id="stmt-line">
+          <span class="stmt-plain">WE'RE</span>
+          <span class="stmt-gold"> TECH</span>
         </div>
-        <div class="projects-grid">
-          <div class="project-card">
+
+        <!-- Decorative star icon -->
+        <div class="stmt-star" id="stmt-star">✦</div>
+
+        <!-- STATEMENT DESCRIPTION — Change this text -->
+        <p class="stmt-desc" id="stmt-desc">
+          Your compass for D&amp;T's digital transformation. Driving innovation
+          across every layer of the enterprise — from AI to infrastructure.
+        </p>
+
+        <!--
+        STATS ROW
+        ─────────
+        To change a stat: update the number in data-count=""
+        and the label text below it.
+        data-count="100"  → counts up to 100
+        data-count="2"    → counts up to 2 (displayed as "2K")
+        -->
+        <div class="stats-row" id="stats-row">
+
+          <div class="stat-item">
+            <div class="stat-num">
+              <span class="counter" data-count="100">0</span>
+              <span class="stat-sfx">+</span>
+            </div>
+            <!-- STAT LABEL — Change this -->
+            <div class="stat-lbl">Active Projects</div>
+          </div>
+
+          <div class="stat-sep"></div>
+
+          <div class="stat-item">
+            <div class="stat-num">
+              <span class="counter" data-count="2">0</span>
+              <span class="stat-sfx">K+</span>
+            </div>
+            <!-- STAT LABEL — Change this -->
+            <div class="stat-lbl">People Impacted</div>
+          </div>
+
+          <div class="stat-sep"></div>
+
+          <div class="stat-item">
+            <div class="stat-num">
+              <span class="counter" data-count="6">0</span>
+              <span class="stat-sfx"></span>
+            </div>
+            <!-- STAT LABEL — Change this -->
+            <div class="stat-lbl">Core Departments</div>
+          </div>
+
+        </div><!-- end stats-row -->
+      </div>
+    </div>
+  </div><!-- end scene-stats -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SCENE 3 · "THE PATHS WE CHART" TRANSITION
+       ═══════════════════════════════════════════════════════ -->
+  <div class="scene" id="scene-paths" style="--scene-h: 200vh;">
+    <div class="scene-inner">
+      <div class="paths-wrap">
+
+        <!-- SECTION LABEL — Change this -->
+        <p class="paths-label" id="paths-label">OUR AREAS OF FOCUS</p>
+
+        <!--
+        SECTION HEADING — Change these two lines.
+        <br> creates the line break.
+        -->
+        <h2 class="paths-h2" id="paths-h2">
+          THE PATHS<br>WE CHART
+        </h2>
+
+      </div>
+    </div>
+  </div><!-- end scene-paths -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       DEPARTMENT SCENES — 6 total, one per department
+       ───────────────────────────────────────────────────────────────
+       HOW TO EDIT:
+         • Change dept-num (e.g. "01 ──") — cosmetic only
+         • Change dept-cat (e.g. "AI & AUTOMATION") — department name in header
+         • Change dept-title <h2> — the large headline
+         • Change dept-desc <p> — the body paragraph
+         • Change each project-card's: card-num, <h3>, <p>, and .card-tags
+
+       HOW TO ADD A NEW DEPARTMENT:
+         Copy one entire <div class="scene dept-scene"> block,
+         give it a new id (e.g. id="dept-6") and data-dept="6",
+         update the content, and add one more <span class="pdot">
+         in the header above.
+       ═══════════════════════════════════════════════════════════════ -->
+
+
+  <!-- ── DEPARTMENT 1 · AI & AUTOMATION ─────────────────────── -->
+  <div class="scene dept-scene" id="dept-0" data-dept="0" style="--scene-h: 320vh;">
+    <div class="scene-inner">
+      <div class="orb orb-left"></div>
+      <div class="dept-wrap">
+
+        <div class="dept-meta" data-el="meta">
+          <span class="dept-num">01 ──</span>
+          <!-- DEPARTMENT NAME → shown in small caps above headline -->
+          <span class="dept-cat">AI &amp; AUTOMATION</span>
+        </div>
+
+        <!-- DEPARTMENT HEADLINE -->
+        <h2 class="dept-h2" data-el="title">
+          Intelligent systems<br>that drive outcomes.
+        </h2>
+
+        <!-- DEPARTMENT DESCRIPTION -->
+        <p class="dept-p" data-el="desc">
+          We build AI-powered solutions and automation frameworks that eliminate
+          friction, accelerate decision-making, and unlock new capabilities
+          across the enterprise.
+        </p>
+
+        <div class="cards-row">
+
+          <!-- PROJECT CARD 1 ── change title, description, and tags -->
+          <div class="project-card" data-ci="0">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 01</p>
+            <div class="card-num">PROJECT 01</div>
             <h3>Intelligent Process Automation</h3>
             <p>End-to-end workflow automation using RPA and AI, reducing manual effort by 70% across finance and operations.</p>
             <div class="card-tags"><span>RPA</span><span>AI</span><span>Workflow</span></div>
           </div>
-          <div class="project-card">
+
+          <!-- PROJECT CARD 2 -->
+          <div class="project-card" data-ci="1">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 02</p>
+            <div class="card-num">PROJECT 02</div>
             <h3>AI Analytics Dashboard</h3>
             <p>Real-time predictive analytics platform giving leadership instant visibility into business performance metrics.</p>
             <div class="card-tags"><span>ML</span><span>BI</span><span>Predictions</span></div>
           </div>
-          <div class="project-card">
+
+          <!-- PROJECT CARD 3 -->
+          <div class="project-card" data-ci="2">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 03</p>
+            <div class="card-num">PROJECT 03</div>
             <h3>Generative AI Assistant</h3>
             <p>Internal LLM-powered assistant for knowledge management, code generation, and employee productivity.</p>
             <div class="card-tags"><span>LLM</span><span>GenAI</span><span>Productivity</span></div>
           </div>
+
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- PLATFORMS & APPLICATIONS -->
-      <div class="section-content" id="platforms-applications">
-        <div class="section-header">
-          <p class="section-label">02 / PLATFORMS &amp; APPLICATIONS</p>
-          <h2>Scalable platforms<br />built for the future.</h2>
-          <p class="section-desc">Modern, cloud-native applications and platforms designed to scale with the business — delivering reliability, speed, and seamless user experiences.</p>
+
+  <!-- ── DEPARTMENT 2 · PLATFORMS & APPLICATIONS ────────────── -->
+  <div class="scene dept-scene" id="dept-1" data-dept="1" style="--scene-h: 320vh;">
+    <div class="scene-inner">
+      <div class="orb orb-right"></div>
+      <div class="dept-wrap">
+
+        <div class="dept-meta" data-el="meta">
+          <span class="dept-num">02 ──</span>
+          <span class="dept-cat">PLATFORMS &amp; APPLICATIONS</span>
         </div>
-        <div class="projects-grid">
-          <div class="project-card">
+
+        <h2 class="dept-h2" data-el="title">
+          Scalable platforms<br>built for the future.
+        </h2>
+
+        <p class="dept-p" data-el="desc">
+          Modern, cloud-native applications designed to scale with the
+          business — delivering reliability, speed, and seamless user
+          experiences at every touchpoint.
+        </p>
+
+        <div class="cards-row">
+
+          <div class="project-card" data-ci="0">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 01</p>
+            <div class="card-num">PROJECT 01</div>
             <h3>Enterprise App Modernization</h3>
-            <p>Migration of legacy monolithic systems to microservices architecture, improving deployment speed by 5x.</p>
+            <p>Migration of legacy monolithic systems to microservices architecture, improving deployment speed by 5×.</p>
             <div class="card-tags"><span>Microservices</span><span>Cloud</span><span>API</span></div>
           </div>
-          <div class="project-card">
+
+          <div class="project-card" data-ci="1">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 02</p>
+            <div class="card-num">PROJECT 02</div>
             <h3>Cloud-Native Dev Platform</h3>
-            <p>Internal developer platform with CI/CD pipelines, containerization, and self-service infrastructure provisioning.</p>
+            <p>Internal developer platform with CI/CD pipelines, containerisation, and self-service infrastructure provisioning.</p>
             <div class="card-tags"><span>Kubernetes</span><span>DevOps</span><span>IaC</span></div>
           </div>
-          <div class="project-card">
+
+          <div class="project-card" data-ci="2">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 03</p>
+            <div class="card-num">PROJECT 03</div>
             <h3>API Integration Hub</h3>
-            <p>Centralized API gateway enabling seamless third-party integrations and real-time data exchange across systems.</p>
+            <p>Centralised API gateway enabling seamless third-party integrations and real-time data exchange across systems.</p>
             <div class="card-tags"><span>REST</span><span>GraphQL</span><span>Integration</span></div>
           </div>
+
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- DATA SOLUTIONS -->
-      <div class="section-content" id="data-solutions">
-        <div class="section-header">
-          <p class="section-label">03 / DATA SOLUTIONS</p>
-          <h2>Data as a<br />strategic asset.</h2>
-          <p class="section-desc">We architect end-to-end data ecosystems — from ingestion to insight — empowering teams to make confident, data-driven decisions at every level.</p>
+
+  <!-- ── DEPARTMENT 3 · DATA SOLUTIONS ──────────────────────── -->
+  <div class="scene dept-scene" id="dept-2" data-dept="2" style="--scene-h: 320vh;">
+    <div class="scene-inner">
+      <div class="orb orb-center"></div>
+      <div class="dept-wrap">
+
+        <div class="dept-meta" data-el="meta">
+          <span class="dept-num">03 ──</span>
+          <span class="dept-cat">DATA SOLUTIONS</span>
         </div>
-        <div class="projects-grid">
-          <div class="project-card">
+
+        <h2 class="dept-h2" data-el="title">
+          Data as a<br>strategic asset.
+        </h2>
+
+        <p class="dept-p" data-el="desc">
+          We architect end-to-end data ecosystems — from ingestion to insight —
+          empowering teams to make confident, data-driven decisions at every
+          level of the organisation.
+        </p>
+
+        <div class="cards-row">
+
+          <div class="project-card" data-ci="0">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 01</p>
+            <div class="card-num">PROJECT 01</div>
             <h3>Enterprise Data Lake</h3>
-            <p>Unified data lake on cloud storing structured and unstructured data with schema-on-read architecture for flexible querying.</p>
-            <div class="card-tags"><span>Data Lake</span><span>AWS S3</span><span>Databricks</span></div>
+            <p>Unified cloud data lake storing structured and unstructured data with schema-on-read for flexible querying.</p>
+            <div class="card-tags"><span>Data Lake</span><span>Databricks</span><span>AWS S3</span></div>
           </div>
-          <div class="project-card">
+
+          <div class="project-card" data-ci="1">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 02</p>
+            <div class="card-num">PROJECT 02</div>
             <h3>Real-Time Analytics Pipeline</h3>
             <p>Streaming data infrastructure processing millions of events per second for live operational dashboards.</p>
             <div class="card-tags"><span>Kafka</span><span>Spark</span><span>Streaming</span></div>
           </div>
-          <div class="project-card">
+
+          <div class="project-card" data-ci="2">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 03</p>
+            <div class="card-num">PROJECT 03</div>
             <h3>Data Governance Framework</h3>
             <p>Company-wide data catalog, lineage tracking, and access controls ensuring data quality and regulatory compliance.</p>
             <div class="card-tags"><span>Governance</span><span>Compliance</span><span>Catalog</span></div>
           </div>
+
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- INFRASTRUCTURE & SECURITY -->
-      <div class="section-content" id="infra-security">
-        <div class="section-header">
-          <p class="section-label">04 / INFRASTRUCTURE &amp; SECURITY</p>
-          <h2>Resilient foundations.<br />Zero compromise.</h2>
-          <p class="section-desc">We design and operate infrastructure that is always-on, always-secure — from zero-trust network architecture to global cloud deployments.</p>
+
+  <!-- ── DEPARTMENT 4 · INFRASTRUCTURE & SECURITY ───────────── -->
+  <div class="scene dept-scene" id="dept-3" data-dept="3" style="--scene-h: 320vh;">
+    <div class="scene-inner">
+      <div class="orb orb-left"></div>
+      <div class="dept-wrap">
+
+        <div class="dept-meta" data-el="meta">
+          <span class="dept-num">04 ──</span>
+          <span class="dept-cat">INFRASTRUCTURE &amp; SECURITY</span>
         </div>
-        <div class="projects-grid">
-          <div class="project-card">
+
+        <h2 class="dept-h2" data-el="title">
+          Resilient foundations.<br>Zero compromise.
+        </h2>
+
+        <p class="dept-p" data-el="desc">
+          We design and operate infrastructure that is always-on and
+          always-secure — from zero-trust network architecture to
+          global multi-cloud deployments.
+        </p>
+
+        <div class="cards-row">
+
+          <div class="project-card" data-ci="0">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 01</p>
+            <div class="card-num">PROJECT 01</div>
             <h3>Zero Trust Network Architecture</h3>
             <p>Complete ZTA implementation with identity-based access, microsegmentation, and continuous verification across all endpoints.</p>
             <div class="card-tags"><span>Zero Trust</span><span>IAM</span><span>Security</span></div>
           </div>
-          <div class="project-card">
+
+          <div class="project-card" data-ci="1">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 02</p>
+            <div class="card-num">PROJECT 02</div>
             <h3>Multi-Cloud Migration</h3>
-            <p>Structured migration of on-premises workloads to multi-cloud environment, achieving 40% infrastructure cost reduction.</p>
+            <p>Structured migration of on-premises workloads to multi-cloud, achieving 40% infrastructure cost reduction.</p>
             <div class="card-tags"><span>AWS</span><span>Azure</span><span>IaC</span></div>
           </div>
-          <div class="project-card">
+
+          <div class="project-card" data-ci="2">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 03</p>
+            <div class="card-num">PROJECT 03</div>
             <h3>Security Operations Center</h3>
             <p>24/7 SOC with SIEM platform, automated threat detection, and incident response playbooks protecting critical assets.</p>
             <div class="card-tags"><span>SOC</span><span>SIEM</span><span>Threat Intel</span></div>
           </div>
+
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- WORKPLACE TECHNOLOGY -->
-      <div class="section-content" id="workplace-tech">
-        <div class="section-header">
-          <p class="section-label">05 / WORKPLACE TECHNOLOGY</p>
-          <h2>Empowering people<br />through technology.</h2>
-          <p class="section-desc">We create seamless, human-centered workplace experiences — equipping teams with the right tools to collaborate, create, and perform from anywhere.</p>
+
+  <!-- ── DEPARTMENT 5 · WORKPLACE TECHNOLOGY ────────────────── -->
+  <div class="scene dept-scene" id="dept-4" data-dept="4" style="--scene-h: 320vh;">
+    <div class="scene-inner">
+      <div class="orb orb-right"></div>
+      <div class="dept-wrap">
+
+        <div class="dept-meta" data-el="meta">
+          <span class="dept-num">05 ──</span>
+          <span class="dept-cat">WORKPLACE TECHNOLOGY</span>
         </div>
-        <div class="projects-grid">
-          <div class="project-card">
+
+        <h2 class="dept-h2" data-el="title">
+          Empowering people<br>through technology.
+        </h2>
+
+        <p class="dept-p" data-el="desc">
+          We create seamless, human-centred workplace experiences — equipping
+          teams with the right tools to collaborate, create, and perform
+          from anywhere.
+        </p>
+
+        <div class="cards-row">
+
+          <div class="project-card" data-ci="0">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 01</p>
+            <div class="card-num">PROJECT 01</div>
             <h3>Digital Workspace Transformation</h3>
             <p>End-to-end overhaul of employee digital experience, unifying communication, productivity, and HR tools in one ecosystem.</p>
             <div class="card-tags"><span>M365</span><span>UX</span><span>Hybrid Work</span></div>
           </div>
-          <div class="project-card">
+
+          <div class="project-card" data-ci="1">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 02</p>
+            <div class="card-num">PROJECT 02</div>
             <h3>Intelligent Collaboration Suite</h3>
             <p>AI-enhanced meeting rooms, async video tools, and smart scheduling to improve distributed team collaboration.</p>
             <div class="card-tags"><span>Teams</span><span>AI</span><span>Collaboration</span></div>
           </div>
-          <div class="project-card">
+
+          <div class="project-card" data-ci="2">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 03</p>
+            <div class="card-num">PROJECT 03</div>
             <h3>Smart Office Infrastructure</h3>
             <p>IoT-enabled office spaces with occupancy sensing, environment control, and integrated booking systems.</p>
             <div class="card-tags"><span>IoT</span><span>Smart Building</span><span>Automation</span></div>
           </div>
+
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- DIGITAL CHANNELS -->
-      <div class="section-content" id="digital-channels">
-        <div class="section-header">
-          <p class="section-label">06 / DIGITAL CHANNELS</p>
-          <h2>Experiences that<br />connect and convert.</h2>
-          <p class="section-desc">We craft omnichannel digital experiences that meet customers where they are — delivering coherent, compelling journeys across every touchpoint.</p>
+
+  <!-- ── DEPARTMENT 6 · DIGITAL CHANNELS ────────────────────── -->
+  <div class="scene dept-scene" id="dept-5" data-dept="5" style="--scene-h: 320vh;">
+    <div class="scene-inner">
+      <div class="orb orb-center"></div>
+      <div class="dept-wrap">
+
+        <div class="dept-meta" data-el="meta">
+          <span class="dept-num">06 ──</span>
+          <span class="dept-cat">DIGITAL CHANNELS</span>
         </div>
-        <div class="projects-grid">
-          <div class="project-card">
+
+        <h2 class="dept-h2" data-el="title">
+          Experiences that<br>connect and convert.
+        </h2>
+
+        <p class="dept-p" data-el="desc">
+          We craft omnichannel digital experiences that meet customers where
+          they are — delivering coherent, compelling journeys across every
+          touchpoint.
+        </p>
+
+        <div class="cards-row">
+
+          <div class="project-card" data-ci="0">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 01</p>
+            <div class="card-num">PROJECT 01</div>
             <h3>Omnichannel Experience Platform</h3>
-            <p>Unified customer experience platform spanning web, mobile, and in-store — with consistent personalization at scale.</p>
-            <div class="card-tags"><span>CX</span><span>Personalization</span><span>Omnichannel</span></div>
+            <p>Unified CX platform spanning web, mobile, and in-store — with consistent personalisation at scale.</p>
+            <div class="card-tags"><span>CX</span><span>Personalisation</span><span>Omnichannel</span></div>
           </div>
-          <div class="project-card">
+
+          <div class="project-card" data-ci="1">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 02</p>
+            <div class="card-num">PROJECT 02</div>
             <h3>Mobile-First Strategy</h3>
             <p>Cross-platform mobile applications with offline-first architecture, biometric auth, and sub-second load performance.</p>
             <div class="card-tags"><span>React Native</span><span>PWA</span><span>Mobile</span></div>
           </div>
-          <div class="project-card">
+
+          <div class="project-card" data-ci="2">
             <span class="card-dot"></span>
-            <p class="card-number">PROJECT 03</p>
+            <div class="card-num">PROJECT 03</div>
             <h3>Customer Portal Redesign</h3>
             <p>Full UX/UI overhaul of customer-facing portal, increasing engagement by 65% and support ticket deflection by 40%.</p>
             <div class="card-tags"><span>UX</span><span>Self-Service</span><span>Portal</span></div>
           </div>
+
         </div>
       </div>
+    </div>
+  </div>
 
-    </section>
-  </main>
 
-  <!-- Contact Section -->
-  <section class="contact-section" id="contact">
+  <!-- ═══════════════════════════════════════════════════════
+       CONTACT SECTION
+       ─────────────────────────────────────────────────────
+       Change the heading, subtext, and mailto link below.
+       ═══════════════════════════════════════════════════════ -->
+  <section id="contact">
+    <!-- Gold top-line is drawn by CSS -->
     <div class="contact-inner">
       <p class="contact-label">GET IN TOUCH</p>
-      <h2>Ready to build<br />what's next?</h2>
-      <p class="contact-sub">Partner with the Technology Department to bring your ideas to life.</p>
-      <a href="mailto:technology@company.com" class="btn-primary">Start a Conversation →</a>
+
+      <!-- CONTACT HEADING — Change these two lines -->
+      <h2 class="contact-h2">
+        Ready to build<br>what's next?
+      </h2>
+
+      <!-- CONTACT SUBTEXT — Change this -->
+      <p class="contact-sub">
+        Partner with the Technology Department to bring your ideas to life.
+      </p>
+
+      <!-- CTA BUTTON — Change href to your email or URL -->
+      <a href="mailto:technology@company.com" class="btn-primary">
+        Start a Conversation →
+      </a>
     </div>
   </section>
 
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER — Change the year or org name
+       ═══════════════════════════════════════════════════════ -->
   <footer>
-    <span class="logo-small"><span class="logo-dot">·</span>D&amp;T</span>
-    <span>Technology Department © 2025</span>
+    <span class="footer-logo"><span class="logo-dot">·</span>D&amp;T</span>
+    <span>Technology Department &copy; 2025</span>
   </footer>
 
   <script src="script.js"></script>

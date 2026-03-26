@@ -1,45 +1,60 @@
-/* ============================================================
-   VARIABLES & RESET
-   ============================================================ */
+/*
+╔══════════════════════════════════════════════════════════════╗
+║  STYLE GUIDE — D&T Technology Department                     ║
+╠══════════════════════════════════════════════════════════════╣
+║  COLOR PALETTE                                               ║
+║  • --gold   : #C4984F  ← primary accent, change here only   ║
+║  • --white  : #ffffff                                        ║
+║  • --black  : #060608                                        ║
+║  • --grey   : rgba(255,255,255,0.40)                         ║
+║                                                              ║
+║  FONTS                                                       ║
+║  System font stack — no external font required.              ║
+║  To use a custom font: replace the font-family in body{}     ║
+╚══════════════════════════════════════════════════════════════╝
+*/
+
+/* ── CSS VARIABLES (design tokens) ─────────────────────────── */
 :root {
-  --gold: #C4984F;
-  --gold-light: #d4aa6a;
-  --gold-dim: rgba(196, 152, 79, 0.15);
-  --white: #ffffff;
-  --off-white: #e8e4de;
-  --grey: #9a9690;
-  --grey-dim: rgba(255,255,255,0.06);
-  --black: #060608;
-  --card-bg: rgba(255, 255, 255, 0.93);
-  --card-text: #111;
-  --card-sub: #555;
-  --nav-width: 320px;
-  --header-height: 80px;
-  --transition: 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  /* ★ PRIMARY ACCENT — change this one value to re-theme the whole site */
+  --gold:        #C4984F;
+  --gold-light:  #d4aa6a;
+  --gold-dim:    rgba(196, 152, 79, 0.12);
+  --gold-border: rgba(196, 152, 79, 0.25);
+
+  /* Background / text */
+  --black:       #060608;
+  --white:       #ffffff;
+  --grey:        rgba(255, 255, 255, 0.40);
+  --grey-dim:    rgba(255, 255, 255, 0.08);
+
+  /* Card colours — cards are light-coloured on dark background */
+  --card-bg:     rgba(255, 255, 255, 0.95);
+  --card-text:   #111111;
+  --card-sub:    #555555;
+
+  /* Layout */
+  --hdr-h:       76px;
+
+  /* Animation speed — increase for slower transitions */
+  --ease:        cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
+/* ── RESET ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
   background: var(--black);
   color: var(--white);
+  /* Font — swap this string with a Google Font @import if you want a custom typeface */
   font-family: 'Helvetica Neue', Arial, sans-serif;
   font-size: 15px;
   line-height: 1.6;
   overflow-x: hidden;
 }
 
-/* ============================================================
-   STARS CANVAS
-   ============================================================ */
+/* ── STARS CANVAS ───────────────────────────────────────────── */
+/* The canvas sits behind everything. Do not change position/z-index. */
 #stars {
   position: fixed;
   inset: 0;
@@ -47,270 +62,401 @@ body {
   pointer-events: none;
 }
 
-/* ============================================================
+/* ═══════════════════════════════════════════════════════════════
    HEADER
-   ============================================================ */
-header {
+   ═══════════════════════════════════════════════════════════════ */
+#site-header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--header-height);
+  top: 0; left: 0; right: 0;
+  height: var(--hdr-h);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
-  z-index: 100;
-  background: linear-gradient(to bottom, rgba(6,6,8,0.85) 0%, transparent 100%);
-  backdrop-filter: blur(2px);
+  padding: 0 44px;
+  z-index: 200;
+  /* Fade from black at top */
+  background: linear-gradient(to bottom, rgba(6,6,8,0.88) 0%, transparent 100%);
+  backdrop-filter: blur(4px);
+  transition: background 0.4s;
 }
 
+/* Logo */
 .logo {
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--white);
-  text-transform: uppercase;
+  letter-spacing: 0.09em;
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 1px;
+}
+.logo-dot { color: var(--gold); font-size: 30px; line-height: 0.8; }
+
+/* Navigation progress dots (auto-managed by JS) */
+.progress-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.pdot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  transition: background 0.4s, transform 0.4s;
+}
+.pdot.active {
+  background: var(--gold);
+  transform: scale(1.4);
 }
 
-.logo-dot {
-  color: var(--gold);
-  font-size: 28px;
-  line-height: 1;
-}
-
-.btn-contact {
-  font-size: 12px;
+/* Header ghost button */
+.btn-ghost {
+  font-size: 11.5px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--white);
   text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.22);
   padding: 10px 22px;
   border-radius: 2px;
-  transition: border-color 0.3s, color 0.3s, background 0.3s;
+  transition: border-color 0.3s, color 0.3s;
 }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
-.btn-contact:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-}
-
-/* ============================================================
-   MAIN LAYOUT
-   ============================================================ */
-main {
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL-SCENE SYSTEM
+   ───────────────────────────────────────────────────────────────
+   Each .scene is a tall container.
+   .scene-inner sticks to the top of the viewport
+   while the user scrolls through the parent's height.
+   JavaScript reads scroll progress and drives animations.
+   ═══════════════════════════════════════════════════════════════ */
+.scene {
   position: relative;
+  height: var(--scene-h, 300vh); /* overridden per-scene with inline style */
   z-index: 1;
-  display: flex;
-  min-height: 100vh;
-  padding-top: var(--header-height);
 }
 
-/* ============================================================
-   LEFT NAV
-   ============================================================ */
-.dept-nav {
+.scene-inner {
   position: sticky;
-  top: var(--header-height);
-  height: calc(100vh - var(--header-height));
-  width: var(--nav-width);
-  flex-shrink: 0;
+  top: 0;
+  height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
-  padding: 0 0 0 40px;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.dept-nav ul {
-  list-style: none;
+/* ── AMBIENT ORB (decorative glowing circle) ────────────────── */
+/* These large blurred circles appear behind content in each scene */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  /* ★ Change the color/size here to adjust the glow */
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(180,120,40,0.18) 0%, transparent 70%);
+}
+.orb-center  { top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.orb-right   { top: 40%; right: -100px; }
+.orb-left    { top: 40%; left: -100px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO SCENE
+   ═══════════════════════════════════════════════════════════════ */
+.hero-wrap {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  text-align: center;
+  /* All elements inside animate via JS — will-change helps GPU */
+  will-change: transform;
 }
 
-.dept-nav li {
-  font-size: 11.5px;
+/* Spinning diamond — ✦ icon */
+.hero-diamond {
+  font-size: 72px;
+  color: var(--gold);
+  /* text-shadow creates the soft glow */
+  text-shadow: 0 0 60px rgba(196,152,79,0.6), 0 0 120px rgba(196,152,79,0.25);
+  will-change: transform, opacity;
+  /* JS controls: opacity, scale, rotation, translateY */
+}
+
+/* Circular ring around diamond */
+.hero-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  /* ★ Ring size — change width/height */
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  border: 1px solid rgba(196,152,79,0.35);
+  /* JS controls: scale, opacity */
+  will-change: transform, opacity;
+}
+
+/* Main title  D & T */
+.hero-title {
+  margin-top: 28px;
+  font-size: clamp(56px, 9vw, 110px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  will-change: transform, opacity;
+}
+/* The middle "&" is gold */
+.ht-amp { color: var(--gold); }
+
+.hero-dept {
+  margin-top: 14px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  cursor: pointer;
-  padding: 9px 0;
+  color: var(--grey);
+  will-change: opacity;
+}
+
+.hero-tagline {
+  margin-top: 10px;
+  font-size: clamp(15px, 2vw, 20px);
+  font-weight: 300;
+  color: rgba(255,255,255,0.6);
+  will-change: opacity, transform;
+}
+
+/* Scroll cue */
+.scroll-cue {
+  margin-top: 52px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
-  transition: color var(--transition);
-  position: relative;
-}
-
-.dept-nav li::before {
-  content: '';
-  display: block;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transition: width 0.35s ease;
-  position: absolute;
-  left: -20px;
-  top: 50%;
-}
-
-.dept-nav li:hover {
-  color: rgba(255,255,255,0.65);
-}
-
-.dept-nav li.active {
-  color: var(--white);
-}
-
-.dept-nav li.active::before {
-  width: 14px;
-}
-
-.nav-icon {
-  color: var(--gold);
-  font-size: 14px;
-  opacity: 0;
-  transform: scale(0.6);
-  transition: opacity 0.35s, transform 0.35s;
-}
-
-.dept-nav li.active .nav-icon {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* ============================================================
-   RIGHT PROJECTS PANEL
-   ============================================================ */
-.projects-panel {
-  flex: 1;
-  padding: 60px 60px 60px 40px;
-  position: relative;
-  min-height: calc(100vh - var(--header-height));
-  display: flex;
-  align-items: center;
-}
-
-.section-content {
-  position: absolute;
-  inset: 60px 60px 60px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(24px);
-  pointer-events: none;
-  transition: opacity var(--transition), transform var(--transition);
-}
-
-.section-content.active {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: all;
-}
-
-/* Section Header */
-.section-header {
-  margin-bottom: 40px;
-}
-
-.section-label {
   font-size: 10px;
-  font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 14px;
+  color: rgba(255,255,255,0.3);
+  will-change: opacity;
+}
+.scroll-line {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+  /* Animated in CSS — creates the moving line effect */
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
 }
 
-.section-header h2 {
-  font-size: clamp(28px, 3.5vw, 44px);
+/* ═══════════════════════════════════════════════════════════════
+   STATS / STATEMENT SCENE
+   ═══════════════════════════════════════════════════════════════ */
+.stmt-wrap {
+  text-align: left;
+  padding: 0 80px;
+  max-width: 900px;
+  width: 100%;
+}
+
+/* "WE'RE TECH" */
+.stmt-line {
+  font-size: clamp(44px, 7vw, 88px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  will-change: transform, opacity;
+}
+.stmt-plain { color: var(--white); }
+/* ★ The highlighted word — currently gold */
+.stmt-gold  { color: var(--gold); }
+
+.stmt-star {
+  margin-top: 20px;
+  font-size: 18px;
+  color: var(--gold);
+  will-change: opacity;
+}
+
+.stmt-desc {
+  margin-top: 18px;
+  font-size: 15px;
+  color: var(--grey);
+  max-width: 480px;
+  line-height: 1.75;
+  will-change: opacity, transform;
+}
+
+/* Stats numbers row */
+.stats-row {
+  margin-top: 52px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  will-change: opacity, transform;
+}
+.stat-item { display: flex; flex-direction: column; gap: 6px; }
+.stat-num  {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+}
+.stat-sfx { font-size: 0.5em; color: var(--gold); font-weight: 400; }
+.stat-lbl  { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey); }
+/* Vertical divider between stats */
+.stat-sep  { width: 1px; height: 56px; background: rgba(255,255,255,0.1); }
+
+/* ═══════════════════════════════════════════════════════════════
+   "THE PATHS WE CHART" TRANSITION SCENE
+   ═══════════════════════════════════════════════════════════════ */
+.paths-wrap {
+  text-align: center;
+  padding: 0 40px;
+}
+
+.paths-label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+  will-change: opacity;
+}
+
+.paths-h2 {
+  font-size: clamp(40px, 7vw, 88px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  will-change: transform, opacity;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DEPARTMENT SCENES
+   ═══════════════════════════════════════════════════════════════ */
+.dept-wrap {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 80px;
+}
+
+/* Department meta line (e.g. "01 ── AI & AUTOMATION") */
+.dept-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  will-change: transform, opacity;
+}
+.dept-num {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+.dept-cat {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+/* Department headline */
+.dept-h2 {
+  font-size: clamp(30px, 4.5vw, 58px);
   font-weight: 300;
   line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: var(--white);
-  margin-bottom: 14px;
+  letter-spacing: -0.015em;
+  margin-bottom: 18px;
+  will-change: transform, opacity;
 }
 
-.section-desc {
-  font-size: 13.5px;
-  color: rgba(255,255,255,0.45);
+/* Department body text */
+.dept-p {
+  font-size: 14px;
+  color: var(--grey);
   max-width: 520px;
-  line-height: 1.7;
+  line-height: 1.75;
+  margin-bottom: 44px;
+  will-change: opacity;
 }
 
-/* Projects Grid */
-.projects-grid {
+/* ── PROJECT CARDS ROW ──────────────────────────────────────── */
+.cards-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
-/* Project Card */
+/* Individual card */
 .project-card {
   background: var(--card-bg);
-  border-radius: 12px;
-  padding: 28px 26px 24px;
+  border-radius: 14px;
+  padding: 28px 24px 22px;
   position: relative;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
+  cursor: pointer;
+  /* JS drives: translateY, rotateX, opacity, scale */
+  will-change: transform, opacity;
+
+  /* Subtle bottom-border reveal on hover (pure CSS) */
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
 }
 
+/* Gold underline — slides in on hover */
 .project-card::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   height: 2px;
   background: var(--gold);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.35s ease;
 }
+.project-card:hover { box-shadow: 0 24px 60px rgba(0,0,0,0.45); }
+.project-card:hover::after { transform: scaleX(1); }
 
-.project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(196,152,79,0.2);
-}
-
-.project-card:hover::after {
-  transform: scaleX(1);
-}
-
+/* Gold dot at top of card */
 .card-dot {
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  width: 8px; height: 8px;
   border-radius: 50%;
   background: var(--gold);
   margin-bottom: 14px;
-  opacity: 0.85;
 }
 
-.card-number {
-  font-size: 9.5px;
+/* "PROJECT 01" label */
+.card-num {
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--grey);
+  color: #999;
   margin-bottom: 10px;
 }
 
+/* Card title */
 .project-card h3 {
   font-size: 14.5px;
   font-weight: 600;
   color: var(--card-text);
-  margin-bottom: 10px;
   line-height: 1.35;
+  margin-bottom: 10px;
 }
 
+/* Card body */
 .project-card p {
   font-size: 12.5px;
   color: var(--card-sub);
@@ -318,77 +464,76 @@ main {
   margin-bottom: 18px;
 }
 
+/* Tags */
 .card-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
-
 .card-tags span {
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #8a7355;
-  background: rgba(196, 152, 79, 0.1);
-  border: 1px solid rgba(196, 152, 79, 0.25);
+  background: rgba(196,152,79,0.1);
+  border: 1px solid rgba(196,152,79,0.22);
   padding: 3px 8px;
   border-radius: 2px;
 }
 
-/* ============================================================
+/* ═══════════════════════════════════════════════════════════════
    CONTACT SECTION
-   ============================================================ */
-.contact-section {
+   ═══════════════════════════════════════════════════════════════ */
+#contact {
   position: relative;
   z-index: 1;
-  min-height: 50vh;
+  min-height: 55vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 40px;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 110px 40px;
+  /* Thin divider line at the very top */
+  border-top: 1px solid rgba(255,255,255,0.07);
 }
 
-.contact-section::before {
+/* Gold shimmer line at top of contact */
+#contact::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 50%;
+  top: 0; left: 50%;
   transform: translateX(-50%);
-  width: 400px;
-  height: 1px;
+  width: 320px; height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 
-.contact-inner {
-  text-align: center;
-  max-width: 560px;
-}
+.contact-inner { text-align: center; max-width: 540px; }
 
 .contact-label {
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 20px;
 }
 
-.contact-inner h2 {
-  font-size: clamp(32px, 4vw, 52px);
+/* CONTACT HEADING — font size */
+.contact-h2 {
+  font-size: clamp(34px, 5vw, 56px);
   font-weight: 300;
+  letter-spacing: -0.015em;
   line-height: 1.2;
   margin-bottom: 18px;
-  letter-spacing: -0.01em;
 }
 
 .contact-sub {
   font-size: 14px;
-  color: rgba(255,255,255,0.45);
-  margin-bottom: 36px;
+  color: var(--grey);
   line-height: 1.7;
+  margin-bottom: 36px;
 }
 
+/* Gold CTA button */
 .btn-primary {
   display: inline-block;
   font-size: 12px;
@@ -398,137 +543,60 @@ main {
   text-decoration: none;
   color: var(--black);
   background: var(--gold);
-  padding: 14px 32px;
+  padding: 15px 34px;
   border-radius: 2px;
-  transition: background 0.3s, transform 0.3s;
+  transition: background 0.3s, transform 0.25s;
 }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
 
-.btn-primary:hover {
-  background: var(--gold-light);
-  transform: translateY(-2px);
-}
-
-/* ============================================================
+/* ═══════════════════════════════════════════════════════════════
    FOOTER
-   ============================================================ */
+   ═══════════════════════════════════════════════════════════════ */
 footer {
   position: relative;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 40px;
+  padding: 26px 44px;
   border-top: 1px solid rgba(255,255,255,0.06);
   font-size: 11px;
-  color: rgba(255,255,255,0.25);
-  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: 0.07em;
 }
+.footer-logo { font-weight: 700; font-size: 13px; display: flex; align-items: center; gap: 1px; }
 
-.logo-small {
-  font-weight: 700;
-  font-size: 13px;
-  color: rgba(255,255,255,0.4);
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  letter-spacing: 0.08em;
-}
+/* ═══════════════════════════════════════════════════════════════
+   SCROLLBAR STYLING
+   ═══════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar       { width: 3px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: rgba(196,152,79,0.3); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
-/* ============================================================
-   SCROLLBAR
-   ============================================================ */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: var(--black);
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(196, 152, 79, 0.3);
-  border-radius: 2px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--gold);
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — TABLET
+   ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 1100px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .cards-row { grid-template-columns: repeat(2, 1fr); }
+  .dept-wrap  { padding: 0 48px; }
+  .stmt-wrap  { padding: 0 48px; }
 }
 
-@media (max-width: 860px) {
-  :root {
-    --nav-width: 260px;
-  }
-  .dept-nav {
-    padding-left: 24px;
-  }
-  .projects-panel {
-    padding: 40px 24px;
-  }
-  .section-content {
-    inset: 40px 24px;
-  }
-}
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — MOBILE
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 680px) {
+  #site-header { padding: 0 20px; }
+  .progress-dots { display: none; } /* too small on mobile */
 
-@media (max-width: 700px) {
-  main {
-    flex-direction: column;
-  }
+  .stmt-wrap, .dept-wrap { padding: 0 24px; }
 
-  .dept-nav {
-    position: relative;
-    top: 0;
-    width: 100%;
-    height: auto;
-    padding: 24px 24px 0;
-  }
+  .hero-diamond { font-size: 48px; }
+  .cards-row    { grid-template-columns: 1fr; }
 
-  .dept-nav ul {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
+  .stats-row { flex-direction: column; gap: 28px; }
+  .stat-sep  { width: 60px; height: 1px; }
 
-  .dept-nav li {
-    font-size: 9px;
-    padding: 6px 10px;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 2px;
-  }
-
-  .dept-nav li.active {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-
-  .dept-nav li::before { display: none; }
-  .nav-icon { display: none; }
-
-  .projects-panel {
-    padding: 32px 24px;
-    min-height: auto;
-  }
-
-  .section-content {
-    position: relative;
-    inset: auto;
-    padding: 0;
-  }
-
-  .section-content:not(.active) {
-    display: none;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  header {
-    padding: 0 24px;
-  }
+  footer { flex-direction: column; gap: 10px; text-align: center; }
 }
